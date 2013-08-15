@@ -1,1 +1,11 @@
-body {background-color: red;}
+
+body {
+	background-color: rgb(255,255,150);
+	}
+div#canvasdiv { 
+	width:500px;
+	height:500px;
+	/*top: 50px; 
+	left:50px;*/
+	margin: 0 auto;
+	}
