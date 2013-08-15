@@ -14,5 +14,11 @@ function canvasApp() {
 	function drawScreen() {
 		context.fillStyle='#abcdef';
 		context.fillRect(0,0,200,200);
+		context.beginPath();
+		context.strokeStyle="orange";
+		context.lineWidth=5;
+		context.arc(100,100,20,(Math.PI/180)*0, (Math.PI/180*360), false);
+		context.stroke();
+		context.closePath();
 	}
 }
