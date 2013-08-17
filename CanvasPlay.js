@@ -1,6 +1,6 @@
 var thewidth=600, theheight=600;
-var theboard = [0,0,0,0,0,0,0,0,0]
-var game_over = false;
+var theboard; 
+var game_over;
 
 window.addEventListener('load',eventWindowLoaded,false);
 			
@@ -10,19 +10,36 @@ function eventWindowLoaded() {
 
 function canvasApp() {
 	var mouseX, mouseY;
-	var x_move = true;
+	var x_move;
 	var theCanvas=document.getElementById("canvas");
 	var context = theCanvas.getContext("2d");
+	var thebutton = document.getElementById("clearbutton");
 	
 	theCanvas.addEventListener("mousemove",onMouseMove, false);
 	theCanvas.addEventListener("click",onMouseClick, false);
+	thebutton.addEventListener("click",clearit,false);
+	
+	function clearit(e) {
+		initGame();
+	}
 	
 	function onMouseMove(e) {
-		mouseX = e.clientX-theCanvas.offsetLeft;
-		mouseY = e.clientY-theCanvas.offsetTop;
+		var rect = theCanvas.getBoundingClientRect();
+		mouseX = e.clientX-rect.left;
+		mouseY = e.clientY-rect.top;
+	}
+	
+	function initGame() {
+		x_move = true;
+		theboard = [0,0,0,0,0,0,0,0,0];
+		game_over = false;
+		context.clearRect(0,0,theCanvas.width,theCanvas.height);
+		//theCanvas.clearRect(0,0,context.width,context.height);
+		drawBoard();
 	}
 	
 	function onMouseClick(e){
+		//alert("X: " + mouseX + "Y: "+ mouseY);
 		if (game_over == false){
 			var thesect = whichsector(mouseX, mouseY);
 			if (x_move){
@@ -180,7 +197,7 @@ function canvasApp() {
 		context.moveTo(thewidth/3*2,0);
 		context.lineTo(thewidth/3*2,theheight);
 		context.stroke();
-		context.endPath();
+		context.closePath();
 		
 	}
 	function drawLetter(theletter, theregion) {
@@ -225,9 +242,9 @@ function canvasApp() {
 	}
 	
 	function drawScreen() {
-		drawBoard();
+		//drawBoard();
 		//drawLetter();
 		//context.endPath();
-		
+		initGame();
 	}
 }
