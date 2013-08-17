@@ -3,12 +3,12 @@ body {
 	background-color: rgb(150,255,255);
 	}
 div#canvasdiv { 
-	width:500px;
-	height:500px;
+	width:600px;
+	height:600px;
 	background-color: rgb(255,255,150);
 	/*top: 50px; 
 	left:50px;*/
-	margin: 100px auto;
+	margin: 50px auto;
 	border-width: 6px;
 	border-style: solid;
 	border-color: #abcdef;
