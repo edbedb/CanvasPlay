@@ -1,5 +1,7 @@
 var thewidth=600, theheight=600;
 var theboard = [0,0,0,0,0,0,0,0,0]
+var game_over = false;
+
 window.addEventListener('load',eventWindowLoaded,false);
 			
 function eventWindowLoaded() {
@@ -21,17 +23,20 @@ function canvasApp() {
 	}
 	
 	function onMouseClick(e){
-		var thesect = whichsector(mouseX, mouseY);
-		if (x_move){
-			if (drawLetter("X",thesect)) {
-				x_move = false;
-				checkwin();
+		if (game_over == false){
+			var thesect = whichsector(mouseX, mouseY);
+			if (x_move){
+				if (drawLetter("X",thesect)) {
+					x_move = false;
+					if (checkwin()) game_over = true;
+					//if (checkwin()) { alert("HERE2"); game_over = true;}
+				}
 			}
-		}
-		else {
-			if (drawLetter("O",thesect)) {
-				x_move=true;
-				checkwin();
+			else {
+				if (drawLetter("O",thesect)) {
+					x_move=true;
+					if (checkwin()) game_over = true;
+				}
 			}
 		}
 	}
@@ -46,7 +51,7 @@ function canvasApp() {
 			context.moveTo(0,theheight/6);
 			context.lineTo(thewidth,theheight/6);
 			context.stroke();
-			context.endPath();
+			context.closePath();
 			return true;
 		}
 		else if (theboard[3] != 0 && theboard[3] == theboard[4] && theboard[3] == theboard[5]) {
@@ -56,7 +61,7 @@ function canvasApp() {
 			context.moveTo(0,theheight/2);
 			context.lineTo(thewidth,theheight/2);
 			context.stroke();
-			context.endPath();
+			context.closePath();
 			return true;
 		}
 		else if (theboard[6] != 0 && theboard[6] == theboard[7] && theboard[6] == theboard[8]) {
@@ -66,7 +71,7 @@ function canvasApp() {
 			context.moveTo(0,theheight/6*5);
 			context.lineTo(thewidth,theheight/6*5);
 			context.stroke();
-			context.endPath();
+			context.closePath();
 			return true;
 		}
 		else if (theboard[0] != 0 && theboard[0] == theboard[3] && theboard[0] == theboard[6]) {
@@ -76,7 +81,7 @@ function canvasApp() {
 			context.moveTo(thewidth/6,0);
 			context.lineTo(thewidth/6,theheight);
 			context.stroke();
-			context.endPath();
+			context.closePath();
 			return true;
 		}
 		else if (theboard[1] != 0 && theboard[1] == theboard[4] && theboard[1] == theboard[7]) {
@@ -86,7 +91,7 @@ function canvasApp() {
 			context.moveTo(thewidth/2,0);
 			context.lineTo(thewidth/2,theheight);
 			context.stroke();
-			context.endPath();
+			context.closePath();
 			return true;
 		}
 		else if (theboard[2] != 0 && theboard[2] == theboard[5] && theboard[2] == theboard[8]) {
@@ -96,7 +101,7 @@ function canvasApp() {
 			context.moveTo(thewidth/6*5,0);
 			context.lineTo(thewidth/6*5,theheight);
 			context.stroke();
-			context.endPath();
+			context.closePath();
 			return true;
 		}
 		else if (theboard[0] != 0 && theboard[0] == theboard[4] && theboard[0] == theboard[8]) {
@@ -106,7 +111,7 @@ function canvasApp() {
 			context.moveTo(0,0);
 			context.lineTo(thewidth,theheight);
 			context.stroke();
-			context.endPath();
+			context.closePath();
 			return true;
 		}
 		else if (theboard[2] != 0 && theboard[2] == theboard[4] && theboard[2] == theboard[6]) {
@@ -116,7 +121,7 @@ function canvasApp() {
 			context.moveTo(thewidth,0);
 			context.lineTo(0,theheight);
 			context.stroke();
-			context.endPath();
+			context.closePath();
 			return true;
 		}
 		else return false;
